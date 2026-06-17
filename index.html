@@ -1,4 +1,156 @@
+<div id="app">
+  
+  <!-- ========================================== -->
+  <!-- 1. CUSTOMER STOREFRONT -->
+  <!-- ========================================== -->
+  <div id="store-view" class="view active-view fade-in">
+    
+    <div id="flash-banner" class="flash-banner hidden">
+      <div class="marquee" id="marquee-text"></div>
+    </div>
 
+    <header class="store-header">
+      <div class="header-content">
+        
+        <div class="top-nav">
+          <div id="user-profile-area">
+            <button class="btn btn-sm" style="background: rgba(255,255,255,0.2); color: white;" onclick="showCustomerModal()">👤 Sign In / Register</button>
+          </div>
+        </div>
+
+        <div class="store-brand" style="cursor: pointer;" onclick="navigatePublic('home')">
+          <img src="https://i.imgur.com/8TeKy2q.png" alt="Company Logo" class="store-logo" onerror="this.style.display='none'">
+          <h1>Premium Store</h1>
+        </div>
+        <p>Your hub for Premium Digital Services</p>
+        
+        <div class="trustpilot-header">
+          <span>Excellent</span>
+          <img src="https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-5.svg" alt="5 Stars">
+          <span>on <strong>Trustpilot</strong></span>
+        </div>
+
+        <div class="search-container">
+          <input type="text" id="search-input" class="search-bar" placeholder="🔍 Search for Netflix, Canva, VPN..." onkeyup="handleSearch()">
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN DYNAMIC CONTENT AREA -->
+    <div id="public-main-content" style="display: block;">
+      <main class="container">
+        <div id="category-menu" class="category-menu"></div>
+        <h2 class="section-title" id="current-category-title">All Deals</h2>
+        <div id="product-grid" class="product-grid"></div>
+      </main>
+
+      <section class="about-section container">
+        <div class="about-grid">
+          <div class="about-content">
+            <h2>Why Choose Premium Store?</h2>
+            <p>Welcome to Nepal's most trusted provider of digital subscriptions. We guarantee the highest quality accounts at a fraction of the regular cost.</p>
+            
+            <div class="trustpilot-about">
+              <img src="https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-5.svg" alt="5 Stars on Trustpilot">
+              <p>Rated 4.9/5 by 1,000+ happy customers in Nepal!</p>
+            </div>
+
+            <ul class="about-features">
+              <li><span>🚀</span> <strong>Instant Delivery:</strong> Get your account instantly via WhatsApp.</li>
+              <li><span>🛡️</span> <strong>100% Secure:</strong> Safe, private, and guaranteed to work.</li>
+              <li><span>🎧</span> <strong>24/7 Support:</strong> We are always online to help you.</li>
+              <li><span>💰</span> <strong>Best Prices:</strong> Unbeatable cheap pricing in Nepal.</li>
+            </ul>
+          </div>
+          <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80" alt="Premium Services">
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- REFUND POLICY PAGE -->
+    <div id="refund-page" class="container text-page-container fade-in" style="display: none;">
+      <h2>Refund & Replacement Policy</h2>
+      <p>Your satisfaction is our priority. Please read our policy carefully before purchasing.</p>
+      <h3>1. Account Replacements</h3>
+      <p>If your digital account stops working before your subscription period ends, we will provide a free replacement within 24 hours of you reporting the issue to our support team.</p>
+      <h3>2. Refunds</h3>
+      <p>Refunds are only issued if we are completely unable to provide a working replacement for the service you purchased. Refunds will be processed back to your original payment method (eSewa, Khalti, IME Pay, or Bank) within 3-5 business days.</p>
+      <h3>3. Non-Refundable Scenarios</h3>
+      <p>We do not offer refunds if you change the password of a shared account, violate the terms of service, or simply change your mind after the account details have been delivered.</p>
+    </div>
+
+    <!-- TERMS OF SERVICE PAGE -->
+    <div id="terms-page" class="container text-page-container fade-in" style="display: none;">
+      <h2>Terms of Service</h2>
+      <p>By purchasing from Premium Store, you agree to the following terms:</p>
+      <h3>1. Account Usage</h3>
+      <p>For shared accounts, you must strictly use only the profile assigned to you. Do not change the email, password, or billing details of any account provided to you. Doing so will result in an immediate ban without a refund.</p>
+      <h3>2. Delivery</h3>
+      <p>All credentials and software access are delivered digitally via WhatsApp. Ensure you have provided the correct contact number during your inquiry.</p>
+      <h3>3. Support Hours</h3>
+      <p>Our standard support operates 24/7. However, technical resolutions (like account replacements) may take between 1 to 24 hours depending on the service provider.</p>
+    </div>
+
+    <!-- SUPPORT PAGE -->
+    <div id="support-page" class="container text-page-container fade-in" style="display: none; text-align: center;">
+      <h2>Need Help? Contact Us</h2>
+      <p>Our dedicated support team is ready to assist you with any questions, replacements, or technical issues.</p>
+      <br>
+      <img src="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&w=400&q=80" alt="Support Team" style="width: 100%; max-width: 400px; border-radius: 16px; margin-bottom: 20px;">
+      <h3>Direct WhatsApp Support</h3>
+      <p>The fastest way to reach us is directly through our official WhatsApp channel.</p>
+      <button class="btn btn-success" style="font-size: 18px; padding: 15px 30px; margin-top: 10px;" onclick="contactSupport()">💬 Chat on WhatsApp</button>
+      <br><br>
+      <p><strong>Phone:</strong> 9825484216</p>
+    </div>
+
+    <footer class="modern-footer">
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h3>✨ Premium Store</h3>
+          <p>Your ultimate destination for cheap, reliable, and premium OTT, Cloud, and Software services in Nepal.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <!-- FIXED: Bulletproof navigation links -->
+            <li><a href="javascript:void(0)" onclick="navigatePublic('home')">Home</a></li>
+            <li><a href="javascript:void(0)" onclick="navigatePublic('refund')">Refund Policy</a></li>
+            <li><a href="javascript:void(0)" onclick="navigatePublic('terms')">Terms of Service</a></li>
+            <li><a href="javascript:void(0)" onclick="navigatePublic('support')">Contact Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Secure Checkout</h3>
+          <p style="margin-bottom: 10px; font-size: 13px;">We accept all major payments:</p>
+          <div class="payment-logos">
+            <img src="https://english.onlinekhabar.com/wp-content/uploads/2020/09/eSewa.jpg" alt="eSewa">
+            <img src="https://yt3.googleusercontent.com/7peNpfVRa3bFg2Mt-vEdZI7O5HOuLv_HTEhgltS7oJUKZmEhxnerPTcaIqXvv9dGT9-jLx9S5A=s900-c-k-c0x00ffffff-no-rj" alt="Khalti">
+            <img src="https://play-lh.googleusercontent.com/UCSHIh9Oy7pLW-poJjP-jvav9W_kMxLV_c9lAmMCcascxUsO4Jbm6daOL6Yb40OcoOg" alt="IME Pay">
+            <img src="https://st.softgamings.com/uploads/BankTransfer_logo_1200x600.png" alt="Bank Transfer">
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span class="secret-admin" ondblclick="showLoginModal()">2026</span> Premium Store. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. MODALS (Customer Auth, Admin Login, Edit) -->
+  <!-- ========================================== -->
+  
+  <div id="customer-modal" class="modal hidden">
+    <div class="modal-content slide-down">
+      <span class="close-btn" onclick="hideCustomerModal()">×</span>
+      <h2 id="cust-modal-title">Create Account</h2>
+      <p id="cust-modal-desc">Sign up to get faster checkouts and exclusive deals!</p>
+      
+      <form id="customer-auth-form" onsubmit="handleCustomerAuth(event)">
+        <div class="input-group">
           <label>Your Name</label>
           <input type="text" id="cust-name" required placeholder="e.g. Samir">
         </div>
@@ -173,4 +325,3 @@
   </div>
 
 </div>
-
