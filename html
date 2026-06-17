@@ -1,0 +1,176 @@
+
+          <label>Your Name</label>
+          <input type="text" id="cust-name" required placeholder="e.g. Samir">
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="cust-pass" required placeholder="Choose a password">
+        </div>
+        <button type="submit" class="btn btn-primary w-100" id="cust-submit-btn">Register Account</button>
+      </form>
+      
+      <p style="text-align: center; margin-top: 15px; font-size: 13px;">
+        <span id="cust-toggle-text">Already have an account?</span> 
+        <a href="javascript:void(0)" style="color: var(--primary);" onclick="toggleCustomerMode()">Click here</a>
+      </p>
+    </div>
+  </div>
+
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content slide-down">
+      <span class="close-btn" onclick="hideLoginModal()">×</span>
+      <h2>Admin Login</h2>
+      <p>Please enter your credentials.</p>
+      <form id="login-form">
+        <div class="input-group">
+          <label>Username</label>
+          <input type="text" id="login-user" required autocomplete="off">
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="login-pass" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Secure Login</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="edit-modal" class="modal hidden">
+    <div class="modal-content slide-down">
+      <span class="close-btn" onclick="closeEditModal()">×</span>
+      <h2>✏️ Edit Product</h2>
+      <form id="edit-product-form" onsubmit="saveEditedProduct(event)">
+        <div class="input-group">
+          <label>Service Name</label>
+          <input type="text" id="edit-name" required>
+        </div>
+        <div class="input-group">
+          <label>Category Group</label>
+          <select id="edit-category" required style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;"></select>
+        </div>
+        <div class="input-row">
+          <div class="input-group flex-1">
+            <label>Current Price (Rs.)</label>
+            <input type="number" id="edit-price" required>
+          </div>
+          <div class="input-group flex-1">
+            <label>Original Price</label>
+            <input type="number" id="edit-old-price">
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Subscription Months (Optional)</label>
+          <input type="text" id="edit-tiers">
+        </div>
+        <div class="input-group">
+          <label>Image Link</label>
+          <input type="text" id="edit-image" required>
+        </div>
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="edit-offer"> Highlight as "Special Offer"</label>
+          <label><input type="checkbox" id="edit-flash"> Show in Flash Sale Banner</label>
+        </div>
+        <button type="submit" class="btn btn-warning w-100" style="margin-top: 15px;">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. ADMIN CONTROL PANEL -->
+  <!-- ========================================== -->
+  <div id="admin-view" class="view">
+    <header class="admin-header">
+      <div class="container header-flex">
+        <h2>⚙️ Control Panel</h2>
+        <button class="btn btn-danger btn-sm" onclick="logoutAdmin()">Logout Admin</button>
+      </div>
+    </header>
+
+    <main class="container admin-grid">
+      <div class="admin-left-col">
+        <div class="admin-card slide-right">
+          <h3>➕ Add Digital Product</h3>
+          <form id="add-product-form" onsubmit="addNewProduct(event)">
+            <div class="input-group">
+              <label>Service Name</label>
+              <input type="text" id="new-name" placeholder="e.g. NordVPN" required>
+            </div>
+            <div class="input-group">
+              <label>Category Group</label>
+              <select id="new-category" required style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;"></select>
+            </div>
+            <div class="input-row">
+              <div class="input-group flex-1">
+                <label>Current Price (Rs.)</label>
+                <input type="number" id="new-price" required>
+              </div>
+              <div class="input-group flex-1">
+                <label>Original Price</label>
+                <input type="number" id="new-old-price" placeholder="Optional">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Subscription Months (Optional)</label>
+              <input type="text" id="new-tiers" placeholder="e.g. 1 Month: 300, 1 Year: 1200">
+            </div>
+            <div class="input-group">
+              <label>Image Link</label>
+              <input type="text" id="new-image" required>
+            </div>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="new-offer"> Highlight as "Special Offer"</label>
+              <label><input type="checkbox" id="new-flash"> Show in Flash Sale Banner</label>
+            </div>
+            <button type="submit" class="btn btn-success w-100" style="margin-top: 15px;">Publish Product</button>
+          </form>
+        </div>
+
+        <div class="admin-card slide-right" style="margin-top: 20px;">
+          <h3>🏷️ Manage Categories</h3>
+          <form id="add-category-form" onsubmit="addNewCategory(event)" style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <input type="text" id="new-category-name" placeholder="Add new tag..." required style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+          <div id="admin-category-list" class="category-tag-list"></div>
+        </div>
+      </div>
+
+      <div class="admin-card slide-left">
+        <h3>📦 Manage Store</h3>
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Stock Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden">Action Successful!</div>
+
+  <div class="floating-whatsapp" onclick="contactSupport()">
+    <svg viewBox="0 0 32 32" class="whatsapp-icon">
+      <path d="M16.01 2.01c-7.72 0-14 6.28-14 14 0 2.47.64 4.8 1.76 6.84L2 30l7.35-1.92c1.98 1.03 4.23 1.61 6.66 1.61 7.71 0 14-6.28 14-14s-6.29-14-14-14zm0 25.61c-2.08 0-4.05-.53-5.8-1.47l-.42-.22-4.32 1.13 1.15-4.21-.24-.4C5.46 20.61 4.9 18.38 4.9 16.01c0-6.13 4.99-11.11 11.11-11.11 6.13 0 11.11 4.98 11.11 11.11s-4.98 11.12-11.11 11.12zM22.1 19.33c-.33-.17-1.98-.98-2.28-1.09-.3-.11-.53-.17-.75.16-.22.33-.86 1.09-1.06 1.31-.19.22-.39.25-.72.08-1.89-.95-3.32-1.94-4.57-3.69-.13-.18 0-.28.16-.44.15-.15.33-.39.49-.58.16-.19.22-.33.33-.55.11-.22.05-.41-.03-.58-.08-.17-.75-1.81-1.03-2.48-.27-.65-.54-.56-.75-.57h-.64c-.22 0-.58.08-.89.41-.31.33-1.19 1.16-1.19 2.84 0 1.67 1.22 3.28 1.39 3.5.17.22 2.39 3.65 5.79 5.12 2.29 1 2.94 1.08 3.99.91 1.04-.17 3.36-1.37 3.83-2.7.47-1.33.47-2.47.33-2.71-.14-.23-.5-.38-.83-.55z"/>
+    </svg>
+  </div>
+
+  <!-- FIXED: WARM WELCOME POPUP -->
+  <div id="welcome-modal" class="modal hidden">
+    <div id="welcome-content-box" class="modal-content welcome-content">
+      <span class="close-btn" onclick="closeWelcomeModal()">×</span>
+      <div class="welcome-icon">👋</div>
+      <h2 class="welcome-title">Welcome to Premium Store!</h2>
+      <p class="welcome-text">We are thrilled to have you here. Discover the best digital services, exclusive offers, and get instant delivery today.</p>
+      <button class="btn btn-primary w-100" onclick="closeWelcomeModal()" style="font-size: 16px; padding: 12px; margin-top: 10px; border-radius: 30px;">Start Exploring ✨</button>
+    </div>
+  </div>
+
+</div>
+
