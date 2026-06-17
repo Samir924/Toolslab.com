@@ -1,9 +1,4 @@
-      showToast("❌ Incorrect username or password.");
-      return;
-    }
-  }
-
-  saveActiveCustomer();@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
   --primary: #4F46E5;
